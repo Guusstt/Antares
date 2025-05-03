@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const DELAY = 800; // Simulasi network delay
 
@@ -9,107 +9,126 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const medicines = [
   {
     id: 1,
-    name: 'Paracetamol 500mg',
+    name: "Paracetamol 500mg",
     price: 15000,
-    category: 'otc',
-    image: 'https://res-4.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1687401112_paracet',
-    description: 'Obat pereda nyeri dan demam. Dapat digunakan untuk meringankan sakit kepala, nyeri otot, dan demam.',
-    dosage: 'Dewasa: 1-2 tablet setiap 4-6 jam sesuai kebutuhan. Maksimal 8 tablet per hari.',
-    sideEffects: 'Jarang terjadi: ruam kulit, gangguan fungsi hati pada dosis tinggi',
-    stock: 100
+    category: "otc",
+    image:
+      "https://res-4.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1687401112_paracet",
+    description:
+      "Obat pereda nyeri dan demam. Dapat digunakan untuk meringankan sakit kepala, nyeri otot, dan demam.",
+    dosage:
+      "Dewasa: 1-2 tablet setiap 4-6 jam sesuai kebutuhan. Maksimal 8 tablet per hari.",
+    sideEffects:
+      "Jarang terjadi: ruam kulit, gangguan fungsi hati pada dosis tinggi",
+    stock: 100,
   },
   {
     id: 2,
-    name: 'Amoxicillin 500mg',
+    name: "Amoxicillin 500mg",
     price: 25000,
-    category: 'prescription',
-    image: 'https://res-5.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1687394621_amox_dexa',
-    description: 'Antibiotik untuk mengatasi infeksi bakteri pada saluran pernapasan, telinga, saluran kemih, dan kulit.',
-    dosage: 'Dewasa: 250-500mg setiap 8 jam. Anak-anak: Dosis berdasarkan berat badan.',
-    sideEffects: 'Diare, mual, ruam kulit, reaksi alergi',
-    stock: 80
+    category: "prescription",
+    image:
+      "https://res-5.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1687394621_amox_dexa",
+    description:
+      "Antibiotik untuk mengatasi infeksi bakteri pada saluran pernapasan, telinga, saluran kemih, dan kulit.",
+    dosage:
+      "Dewasa: 250-500mg setiap 8 jam. Anak-anak: Dosis berdasarkan berat badan.",
+    sideEffects: "Diare, mual, ruam kulit, reaksi alergi",
+    stock: 80,
   },
   {
     id: 3,
-    name: 'Vitamin C 1000mg',
+    name: "Vitamin C 1000mg",
     price: 30000,
-    category: 'vitamins',
-    image: 'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//805/sidomuncul_sidomuncul-vitamin-c-1000-mg_full02.jpg',
-    description: 'Suplemen untuk meningkatkan daya tahan tubuh dan membantu penyerapan zat besi.',
-    dosage: 'Dewasa: 1 tablet sehari',
-    sideEffects: 'Dosis tinggi dapat menyebabkan gangguan pencernaan ringan',
-    stock: 150
+    category: "vitamins",
+    image:
+      "https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//805/sidomuncul_sidomuncul-vitamin-c-1000-mg_full02.jpg",
+    description:
+      "Suplemen untuk meningkatkan daya tahan tubuh dan membantu penyerapan zat besi.",
+    dosage: "Dewasa: 1 tablet sehari",
+    sideEffects: "Dosis tinggi dapat menyebabkan gangguan pencernaan ringan",
+    stock: 150,
   },
   {
     id: 4,
-    name: 'Minyak Kayu Putih 60ml',
+    name: "Minyak Kayu Putih 60ml",
     price: 20000,
-    category: 'personal-care',
-    image: 'https://down-id.img.susercontent.com/file/79f372ca4004a330006ed184ada7f15b',
-    description: 'Minyak esensial untuk meredakan gejala masuk angin, gatal akibat gigitan serangga, dan nyeri otot.',
-    dosage: 'Oleskan secukupnya pada area yang diinginkan',
-    sideEffects: 'Dapat menyebabkan iritasi pada kulit sensitif',
-    stock: 120
+    category: "personal-care",
+    image:
+      "https://down-id.img.susercontent.com/file/79f372ca4004a330006ed184ada7f15b",
+    description:
+      "Minyak esensial untuk meredakan gejala masuk angin, gatal akibat gigitan serangga, dan nyeri otot.",
+    dosage: "Oleskan secukupnya pada area yang diinginkan",
+    sideEffects: "Dapat menyebabkan iritasi pada kulit sensitif",
+    stock: 120,
   },
   {
     id: 5,
-    name: 'Omeprazole 20mg',
+    name: "Omeprazole 20mg",
     price: 35000,
-    category: 'prescription',
-    image: 'https://res-3.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1659852613_5fb373ee41ab59059e86704d',
-    description: 'Obat untuk mengurangi produksi asam lambung. Digunakan untuk mengatasi maag, GERD, dan tukak lambung.',
-    dosage: 'Dewasa: 1 kapsul sehari sebelum makan',
-    sideEffects: 'Sakit kepala, diare, nyeri perut',
-    stock: 60
+    category: "prescription",
+    image:
+      "https://res-3.cloudinary.com/dk0z4ums3/image/upload/c_scale,h_500,w_500/v1/production/pharmacy/products/1659852613_5fb373ee41ab59059e86704d",
+    description:
+      "Obat untuk mengurangi produksi asam lambung. Digunakan untuk mengatasi maag, GERD, dan tukak lambung.",
+    dosage: "Dewasa: 1 kapsul sehari sebelum makan",
+    sideEffects: "Sakit kepala, diare, nyeri perut",
+    stock: 60,
   },
   {
     id: 6,
-    name: 'Loratadine 10mg',
+    name: "Loratadine 10mg",
     price: 18000,
-    category: 'otc',
-    image: 'https://d3bbrrd0qs69m4.cloudfront.net/images/product/apotek_online_k24klik_20230815090426359225_LORATADINE.png',
-    description: 'Antihistamin untuk meredakan gejala alergi seperti bersin, hidung tersumbat, dan gatal-gatal.',
-    dosage: 'Dewasa dan anak >12 tahun: 1 tablet sehari',
-    sideEffects: 'Mengantuk, mulut kering, sakit kepala',
-    stock: 90
+    category: "otc",
+    image:
+      "https://d3bbrrd0qs69m4.cloudfront.net/images/product/apotek_online_k24klik_20230815090426359225_LORATADINE.png",
+    description:
+      "Antihistamin untuk meredakan gejala alergi seperti bersin, hidung tersumbat, dan gatal-gatal.",
+    dosage: "Dewasa dan anak >12 tahun: 1 tablet sehari",
+    sideEffects: "Mengantuk, mulut kering, sakit kepala",
+    stock: 90,
   },
   {
     id: 7,
-    name: 'Multivitamin Kompleks',
+    name: "Multivitamin Kompleks",
     price: 45000,
-    category: 'vitamins',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMfV0li1Yk4Phsj97fRVhC2t3YXtTMcJuADg&s',
-    description: 'Kombinasi berbagai vitamin dan mineral esensial untuk menjaga kesehatan tubuh secara keseluruhan.',
-    dosage: 'Dewasa: 1 tablet sehari setelah makan',
-    sideEffects: 'Umumnya aman, dapat menyebabkan gangguan pencernaan ringan',
-    stock: 110
+    category: "vitamins",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMfV0li1Yk4Phsj97fRVhC2t3YXtTMcJuADg&s",
+    description:
+      "Kombinasi berbagai vitamin dan mineral esensial untuk menjaga kesehatan tubuh secara keseluruhan.",
+    dosage: "Dewasa: 1 tablet sehari setelah makan",
+    sideEffects: "Umumnya aman, dapat menyebabkan gangguan pencernaan ringan",
+    stock: 110,
   },
   {
     id: 8,
-    name: 'Salep Luka Bakar',
+    name: "Salep Luka Bakar",
     price: 28000,
-    category: 'personal-care',
-    image: 'https://res.cloudinary.com/dk0z4ums3/image/upload/v1745290830/attached_image/5-salep-luka-bakar-yang-ampuh-3-alodokter.jpg',
-    description: 'Salep untuk membantu penyembuhan luka bakar ringan dan mencegah infeksi.',
-    dosage: 'Oleskan tipis pada area yang terkena luka bakar 2-3 kali sehari',
-    sideEffects: 'Jarang terjadi: iritasi lokal, kemerahan',
-    stock: 75
-  }
+    category: "personal-care",
+    image:
+      "https://res.cloudinary.com/dk0z4ums3/image/upload/v1745290830/attached_image/5-salep-luka-bakar-yang-ampuh-3-alodokter.jpg",
+    description:
+      "Salep untuk membantu penyembuhan luka bakar ringan dan mencegah infeksi.",
+    dosage: "Oleskan tipis pada area yang terkena luka bakar 2-3 kali sehari",
+    sideEffects: "Jarang terjadi: iritasi lokal, kemerahan",
+    stock: 75,
+  },
 ];
 
 let users = [
   {
     id: 1,
-    name: 'User Test',
-    email: 'user@test.com',
-    password: 'password123'
-  }
+    name: "User Test",
+    email: "user@test.com",
+    password: "password123",
+  },
 ];
 
 let orders = [];
 let orderCounter = 1;
 
-const delay = (ms = DELAY) => new Promise(resolve => setTimeout(resolve, ms));
+const delay = (ms = DELAY) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // ====================
 // === BACKEND API ====
@@ -117,14 +136,15 @@ const delay = (ms = DELAY) => new Promise(resolve => setTimeout(resolve, ms));
 
 // ✅ Register ke backend
 export const register = async (name, email, password, alamat, no_telepon) => {
+  console.log("Terpencet");
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/register`, {
       nama: name,
       email,
       password,
-      role: 'Pelanggan',
+      role: "Pelanggan",
       alamat,
-      no_telepon
+      no_telepon,
     });
 
     return response.data;
@@ -138,7 +158,7 @@ export const login = async (email, password) => {
   try {
     const response = await axios.post(`${API_BASE_URL}/auth/login`, {
       email,
-      password
+      password,
     });
 
     return response.data;
@@ -158,15 +178,16 @@ export const getMedicines = async () => {
 
 export const getMedicineById = async (id) => {
   await delay();
-  const medicine = medicines.find(m => m.id === parseInt(id));
-  if (!medicine) throw new Error('Medicine not found');
+  const medicine = medicines.find((m) => m.id === parseInt(id));
+  if (!medicine) throw new Error("Medicine not found");
   return { ...medicine };
 };
 
 // ⚠️ MOCK REGISTER: fallback jika backend tidak tersedia
 export const mockRegister = async (name, email, password) => {
   await delay();
-  if (users.some(u => u.email === email)) throw new Error('Email already in use');
+  if (users.some((u) => u.email === email))
+    throw new Error("Email already in use");
 
   const newUser = { id: users.length + 1, name, email, password };
   users.push(newUser);
@@ -181,7 +202,7 @@ export const createOrder = async (orderData) => {
     ...orderData,
     id: orderCounter,
     orderNumber: `ORD-${Date.now()}`,
-    status: 'pending'
+    status: "pending",
   };
 
   orders.push(newOrder);
@@ -189,6 +210,6 @@ export const createOrder = async (orderData) => {
 
   return {
     success: true,
-    orderNumber: newOrder.orderNumber
+    orderNumber: newOrder.orderNumber,
   };
 };
