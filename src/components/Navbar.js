@@ -6,7 +6,7 @@ function Navbar({ cartItemCount, user, onLogout }) {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Link to="/">Apotek Anatares</Link>
+        <Link to="/">Apotek Antares</Link>
       </div>
       <div className="navbar-menu">
         <Link to="/" className="navbar-item">Home</Link>
