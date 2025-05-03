@@ -118,7 +118,7 @@ const delay = (ms = DELAY) => new Promise(resolve => setTimeout(resolve, ms));
 // ✅ Register ke backend
 export const register = async (name, email, password, alamat, no_telepon) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}api/auth/register`, {
+    const response = await axios.post(`${API_BASE_URL}/auth/register`, {
       nama: name,
       email,
       password,
