@@ -24,7 +24,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} Apotek Sehat. All Rights Reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Apotek Antares. All Rights Reserved.</p>
       </div>
     </footer>
   );
