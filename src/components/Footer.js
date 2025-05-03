@@ -6,7 +6,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>Apotek Sehat</h3>
+          <h3>Apotek Antares</h3>
           <p>Menyediakan obat-obatan berkualitas dengan harga terjangkau.</p>
         </div>
         <div className="footer-section">

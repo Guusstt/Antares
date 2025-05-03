@@ -1,6 +1,9 @@
-// Mock API service untuk simulasi interaksi dengan backend
+import axios from 'axios';
 
 const DELAY = 800; // Simulasi network delay
+
+// Gunakan ENV untuk API backend
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 // Data dummy untuk obat-obatan
 const medicines = [
@@ -94,7 +97,6 @@ const medicines = [
   }
 ];
 
-// Mock users untuk simulasi login/register
 let users = [
   {
     id: 1,
@@ -104,14 +106,51 @@ let users = [
   }
 ];
 
-// Mock orders
 let orders = [];
 let orderCounter = 1;
 
-// Helper function untuk menunda eksekusi (simulasi network latency)
 const delay = (ms = DELAY) => new Promise(resolve => setTimeout(resolve, ms));
 
-// API Functions
+// ====================
+// === BACKEND API ====
+// ====================
+
+// ✅ Register ke backend
+export const register = async (name, email, password, alamat, no_telepon) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}api/auth/register`, {
+      nama: name,
+      email,
+      password,
+      role: 'Pelanggan',
+      alamat,
+      no_telepon
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+// ✅ Login ke backend
+export const login = async (email, password) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/auth/login`, {
+      email,
+      password
+    });
+
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error;
+  }
+};
+
+// ====================
+// === MOCK APIs ======
+// ====================
+
 export const getMedicines = async () => {
   await delay();
   return [...medicines];
@@ -120,57 +159,34 @@ export const getMedicines = async () => {
 export const getMedicineById = async (id) => {
   await delay();
   const medicine = medicines.find(m => m.id === parseInt(id));
-  if (!medicine) {
-    throw new Error('Medicine not found');
-  }
+  if (!medicine) throw new Error('Medicine not found');
   return { ...medicine };
 };
 
-export const login = async (email, password) => {
+// ⚠️ MOCK REGISTER: fallback jika backend tidak tersedia
+export const mockRegister = async (name, email, password) => {
   await delay();
-  const user = users.find(u => u.email === email && u.password === password);
-  if (!user) {
-    throw new Error('Invalid credentials');
-  }
-  // Return user data without password
-  const { password: _, ...userData } = user;
-  return userData;
-};
+  if (users.some(u => u.email === email)) throw new Error('Email already in use');
 
-export const register = async (name, email, password) => {
-  await delay();
-  // Check if email already exists
-  if (users.some(u => u.email === email)) {
-    throw new Error('Email already in use');
-  }
-  
-  const newUser = {
-    id: users.length + 1,
-    name,
-    email,
-    password
-  };
-  
+  const newUser = { id: users.length + 1, name, email, password };
   users.push(newUser);
-  
-  // Return user data without password
   const { password: _, ...userData } = newUser;
   return userData;
 };
 
 export const createOrder = async (orderData) => {
   await delay();
-  
+
   const newOrder = {
     ...orderData,
     id: orderCounter,
     orderNumber: `ORD-${Date.now()}`,
     status: 'pending'
   };
-  
+
   orders.push(newOrder);
   orderCounter++;
-  
+
   return {
     success: true,
     orderNumber: newOrder.orderNumber
